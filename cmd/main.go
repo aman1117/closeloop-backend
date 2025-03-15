@@ -4,15 +4,25 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 func main() {
+	dsn := "host=db.svnqvehncqwhpnavjykh.supabase.co user=postgres password=40lpaFTW123!@# dbname=postgres port=5432 sslmode=require"
+
+	_, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		log.Fatal("Failed to connect to database:", err)
+	}
+	log.Println("Database connected successfully!")
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, From CloseLoop!")
+	api := app.Group("/api")
+	api.Get("/", func(c *fiber.Ctx) error {
+		return c.JSON(fiber.Map{
+			"status": "OK"})
 	})
 
-	log.Println("Server running on http://localhost:3000")
-	log.Fatal(app.Listen(":3000"))
+	app.Listen(":3000")
 }
