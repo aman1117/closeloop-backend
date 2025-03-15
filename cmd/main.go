@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/driver/postgres"
@@ -9,7 +11,11 @@ import (
 )
 
 func main() {
-	dsn := "host=db.svnqvehncqwhpnavjykh.supabase.co user=postgres password=40lpaFTW123!@# dbname=postgres port=5432 sslmode=require"
+	dbPassword := os.Getenv("DB_PASSWORD")
+	if dbPassword == "" {
+		log.Fatal("Missing DB_PASSWORD environment variable")
+	}
+	dsn := fmt.Sprintf("host=db.svnqvehncqwhpnavjykh.supabase.co user=postgres password=%s dbname=postgres port=5432 sslmode=require", dbPassword)
 
 	_, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
