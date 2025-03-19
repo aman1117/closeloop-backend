@@ -14,6 +14,7 @@ type User struct {
 	Username string    `gorm:"size:100;uniqueIndex;not null" json:"username" validate:"required,min=4" json:"username"`
 	Email    string    `gorm:"size:100;not null;unique" json:"email" validate:"required,email" json:"email"`
 	Password string    `gorm:"size:100;not null" json:"password" validate:"required,min=6" json:"password"`
+	Avatar   string    `gorm:"type:text" json:"avatar"`
 }
 
 // Validate function to check struct fields

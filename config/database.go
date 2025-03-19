@@ -25,6 +25,7 @@ func ConnectDB() {
 	}
 	dsn := fmt.Sprintf("host=db.svnqvehncqwhpnavjykh.supabase.co user=postgres password=%s dbname=postgres port=5432 sslmode=require", dbPassword)
 
+	//DOCS
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
