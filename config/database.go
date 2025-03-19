@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	_ "github.com/joho/godotenv/autoload"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -13,11 +14,6 @@ var DB *gorm.DB
 var JWTSecret = []byte(os.Getenv("AMAN_SECRET_KEY"))
 
 func ConnectDB() {
-	//FIX
-	// err := godotenv.Load()
-	// if err != nil {
-	// 	log.Fatal("Error loading .env file")
-	// }
 
 	dbPassword := os.Getenv("DB_PASSWORD")
 	if dbPassword == "" {
